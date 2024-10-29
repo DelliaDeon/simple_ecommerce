@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_ecommerce_app/models/shop.dart';
 import 'package:simple_ecommerce_app/pages/cart_screen.dart';
 import 'package:simple_ecommerce_app/pages/intro_screen.dart';
 import 'package:simple_ecommerce_app/pages/shop_screen.dart';
 import 'package:simple_ecommerce_app/theme/theme_provider.dart';
 
 void main(){
-  runApp(ChangeNotifierProvider(
-    create: (context) => ThemeProvider(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+      ),
+
+      ChangeNotifierProvider(
+        create: (context) => Shop(),
+      ),
+    ],
     child: SimpleEcommerce(),
   ));
 }
@@ -17,16 +26,20 @@ class SimpleEcommerce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeProvider>(context, listen: false).themeData,
-      initialRoute: '/',
+    return Consumer<ThemeProvider>(
+      builder: (context, ThemeProvider, child){
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeProvider.themeData,
+          initialRoute: '/',
 
-      routes: {
-        '/': (context) => IntroScreen(),
-        '/shop': (context) => ShopScreen(),
-        '/cart': (context) => CartScreen(),
+          routes: {
+            '/': (context) => IntroScreen(),
+            '/shop': (context) => ShopScreen(),
+            '/cart': (context) => CartScreen(),
 
+          },
+        );
       },
     );
   }

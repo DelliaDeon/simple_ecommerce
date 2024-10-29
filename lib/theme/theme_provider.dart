@@ -6,6 +6,9 @@ class ThemeProvider with ChangeNotifier{
 
   ThemeData get themeData => _themeData;
 
+  // Boolean property to check if the current theme is dark
+  bool get isDarkMode => _themeData.brightness == Brightness.dark;
+
   set themeData(ThemeData themeData){
     _themeData = themeData;
     notifyListeners();
@@ -18,4 +21,5 @@ class ThemeProvider with ChangeNotifier{
       themeData = lightMode;
     }
   }
+
 }

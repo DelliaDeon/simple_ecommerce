@@ -21,7 +21,7 @@ ThemeData darkMode = ThemeData(
   colorScheme: ColorScheme.dark(
     primary: Colors.grey.shade400,
     secondary: Colors.grey.shade600,
-    tertiary: Colors.pink.shade300,
+    tertiary: Colors.pink.shade100,
     inversePrimary: Colors.grey.shade200,
   ),
 );
